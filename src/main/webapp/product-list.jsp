@@ -26,15 +26,26 @@
         <th>Tax value</th>
         <th>Tax type</th>
         <th>Stock</th>
+        <th></th>
     </tr>
     <c:forEach var="product" items="${requestScope.product_list}">
         <tr>
             <td>${product.getId()}</td>
             <td>${product.getName()}</td>
             <td>${product.getPrice()}</td>
-            <td>${Math.round(product.getTaxValue())/100}</td>
+            <td>${Math.round(product.getTaxValue()*100)/100}</td>
             <td>${product.getTaxType()}</td>
             <td>${product.getStock()}</td>
+            <td>
+                <c:if test="${product.getInvoice().getDateOfRelease() == null}">
+                <a href="/edit-product?productId=${product.getId()}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">EDIT</a>
+                </c:if>
+            </td>
+            <td>
+                <c:if test="${product.getInvoice().getDateOfRelease() == null}">
+                <a href="/delete-product?productId=${product.getId()}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">DELETE</a>
+                </c:if>
+            </td>
         </tr>
 
     </c:forEach>

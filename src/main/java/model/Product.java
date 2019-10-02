@@ -34,4 +34,12 @@ public class Product implements IBaseEntity {
         this.taxType = taxType;
         this.stock = stock;
     }
+
+    public Product(Long productToEditId, String name, Double price, TaxType taxType, Integer stock) {
+        this.id = productToEditId;
+        this.name = name;
+        this.price = price;
+        this.taxType = taxType;
+        this.stock = stock;
+    }
 }

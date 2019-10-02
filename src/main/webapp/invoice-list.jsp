@@ -40,13 +40,23 @@
             <td>${invoice.isIfPaid()}</td>
             <td>${invoice.getDateOfRelease().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))}</td>
             <td>${invoice.getDateOfPayment().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))}</td>
-            <td>${invoice.getBillValue()}</td>
+            <c:choose>
+                <c:when test="${invoice.getBillValue() != null}">
+                    <td>${Math.round(invoice.getBillValue()*100)/100}</td>
+                    <%--<td>${invoice.getBillValue()}</td>--%>
+                 </c:when>
+                <c:otherwise>
+                <td></td>
+                </c:otherwise>
+            </c:choose>
             <td>${invoice.getProduct().size()}</td>
             <td>
                 <table>
                     <tr>
                         <td>
+                            <c:if test="${invoice.getDateOfRelease()==null}" >
                             <a href="/add-product?invoiceId=${invoice.getId()}">ADD PRODUCT</a>
+                            </c:if>
                         </td>
                         <td>
                             <a href="/product-list?invoiceId=${invoice.getId()}">LIST PRODUCTS</a>
@@ -57,7 +67,7 @@
                             </c:if>
                         </td>
                         <td>
-                            <c:if test="${invoice.getDateOfRelease() == null}" >
+                            <c:if test="${invoice.getDateOfPayment() == null}" >
                             <a href="/pay-invoice?invoiceId=${invoice.getId()}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">PAID</a>
                             </c:if>
                         </td>

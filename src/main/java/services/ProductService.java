@@ -6,6 +6,7 @@ import model.Product;
 import model.TaxType;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ProductService {
 
@@ -24,6 +25,17 @@ public class ProductService {
     }
 
 
+    public void romoveByID(Long productToRemoveId) {
+        dao.delete(Product.class, productToRemoveId);
+    }
+
+    public Optional<Product> findById(Long productToEditId) {
+        return dao.getById(Product.class, productToEditId);
+    }
+
+    public void update(Product editedProduct) {
+        dao.saveOrUpdate(editedProduct);
+    }
 }
 
 

@@ -16,18 +16,19 @@
 </head>
 <body>
 <jsp:include page="/navigator.jsp"/>
-<form action="/add-product" method="post">
+<form action="${requestScope.productId==null ?'/add-product' : '/edit-product'}" method="post">
     <input type="hidden" name="invoice_which_i_should_add_product_to" value="${requestScope.invoiceId}">
-    Name: <input type="text" name="name">
+    <input type="hidden" name="productId" value="${requestScope.productId}">
+    Name: <input type="text" name="name" value="${requestScope.productName}">
     <br/>
-    Price: <input type="number" step="0.01" name="price">
+    Price: <input type="number" step="0.01" name="price" value="${requestScope.productPrice}">
     <br/>
-    TaxType: <select name="tax_type">
+    TaxType: <select name="tax_type" value="${requestScope.productTaxType}">">
                 <option value="PRODUCT">PRODUCT</option>
                 <option value="SERVICE">SERVICE</option>
             </select>
     <br/>
-    Stock: <input type="number" name="stock">
+    Stock: <input type="number" name="stock" value="${requestScope.productStock}">
     <br/>
     <input type="submit" class="btn btn-secondary" value="Submit">
 </form>

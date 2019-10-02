@@ -19,6 +19,9 @@ public class Main {
 
         System.out.println(p.getTaxValue());
 
+        long l = Math.round(i.getBillValue()) / 100;
+
+
 
     }
 }
